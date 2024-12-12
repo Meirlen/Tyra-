@@ -1,0 +1,57 @@
+
+.transaction-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 25px;
+    vertical-align: middle;
+    background-color: #F6F8FA;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.transaction-info {
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    vertical-align: middle;
+}
+
+.transaction-status {
+    text-align: right;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+    color: #172D43;
+}
+
+.agent {
+    color: #7B8190;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+}
+
+.amount {
+    font-weight: 600;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+    color: #172D43;
+}
+
+.status {
+    color: #40C79A;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: "Inter", sans-serif;
+}
+
+@media (max-width: 600px) {
+    .transaction-status {
+        text-align: left;
+        /* margin-top: 10px; */
+    }
+}

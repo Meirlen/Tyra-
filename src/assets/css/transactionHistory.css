@@ -1,0 +1,16 @@
+.transaction-history {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 375px;
+    margin: 0 auto;
+    /* Center the container */
+}
+
+.transaction-date {
+    margin-bottom: 20px;
+    color: #7B8190;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+}
+

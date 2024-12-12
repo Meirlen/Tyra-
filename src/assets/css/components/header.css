@@ -1,0 +1,31 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0%;
+    /* Center vertically */
+}
+
+.header h1 {
+    text-align: center;
+    flex: 1;
+    margin: 0;
+    font-weight: 600;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+    color: #172D43;
+    display: flex;
+    align-items: center;
+    /* Center vertically */
+    justify-content: center;
+    /* Center horizontally */
+}
