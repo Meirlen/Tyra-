@@ -6,6 +6,7 @@ import SupervisorScreen from './screens/SupervisorScreen';
 import WithdrawlHistoryScreen from './screens/WithdrawlHistoryScreen';
 import MyAgentsScreen from './screens/MyAgentsScreen';
 import TransactionHistory from './screens/TransactionHistory';
+import AdminDashboardScreen from './screens/AdminDashboardScreen';
 function App() {
 
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/transaction-history" element={<TransactionHistory />} />
         <Route path="/withdrawl-history" element={<WithdrawlHistoryScreen />} />
         <Route path="/agents" element={<MyAgentsScreen />} />
+        <Route path="/admin-dashboard" element={<AdminDashboardScreen />} />
       </Routes>
     </Router>
     </>
