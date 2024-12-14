@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import '../assets/css/myAgentsScreen.css';
+import '../../assets/css/myAgentsScreen.css';
 import axios from 'axios';
-import Header from '../components/Header';
-import { formatRussianDate } from '../assets/utils';
-import TransactionEntry from '../components/TransactionEntry';
+import { formatRussianDate } from '../../assets/utils';
+import TransactionEntry from '../../components/TransactionEntry';
 
 
-const MyAgentsScreen = () => {
+const Agents = ({id}) => {
     const [agents, setAgents] = useState([]);
     const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -14,7 +13,7 @@ const MyAgentsScreen = () => {
         const token = localStorage.getItem('authToken');
         const fetchAgents = async () => {
             try {
-                const response = await axios.get(`${baseUrl}/api/v2/tyra_plus/my_agents`, {
+                const response = await axios.get(`${baseUrl}/api/v2/tyra_plus_admin/agents/superviser/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -22,9 +21,7 @@ const MyAgentsScreen = () => {
                 if (response?.data) {
                     setAgents(response.data);
                 }
-                // else {
-                //     alert(response.detail);
-                // }
+               
             } catch (error) {
                 alert(error.response?.data?.detail);
                 console.error('Failed to fetch Agents:', error);
@@ -36,12 +33,11 @@ const MyAgentsScreen = () => {
 
     return (
         <div className="my-agents">
-            <Header title="Мои агенты" />
             {agents.map((agent, index) => (
-                <TransactionEntry key={index} title={agent?.user_name} agent={formatRussianDate(agent?.created_at)} amount={agent?.total_sales_amount} status={agent?.total_sales_count.toString()} />
+                <TransactionEntry key={index} title={agent?.user_name} agent={formatRussianDate(agent?.created_at)} amount={agent?.total_amount} status={agent?.total_sales.toString()} />
             ))}
         </div>
     );
 };
 
-export default MyAgentsScreen;
+export default Agents;

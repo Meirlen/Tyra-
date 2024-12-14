@@ -23,8 +23,10 @@
 .edit-button {
     background: none;
     border: none;
-    font-size: 20px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0%;
 }
 
 /* Profile Section */
@@ -68,80 +70,7 @@
     margin-top: 40px;
 }
 
-/* Balance Section */
-.balance-section {
-    width: 100%;
-    max-width: 343px;
-    background: linear-gradient(135deg, #3875F6, #4d9eff);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: #ffffff;
-    position: relative;
-    overflow: hidden; /* Ensures shapes don’t overflow */
-    border-radius: 8px;
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-}
 
-/* Circle decorations */
-.balance-section::before,
-.balance-section::after {
-    content: '';
-    position: absolute;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    z-index: 1;
-}
-
-.balance-section .extra-circle {
-    width: 65px;
-    height: 65px;
-    top: 23px;
-    left: -36px;
-    content: '';
-    position: absolute;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-}
-
-/* Top-left circle */
-.balance-section::before {
-    width: 170px;
-    height: 170px;
-    top: 72px;
-    left: -59px;
-}
-
-/* Bottom-right circle */
-.balance-section::after {
-    width: 130px;
-    height: 130px;
-    top: -50px;
-    right: -50px;
-}
-
-.balance-info {
-    font-size: 18px;
-}
-
-.balance-info h2 {
-    margin: 0;
-    font-size: 24px;
-}
-
-.withdraw-button {
-    background-color: #ffffff;
-    color: #3875F6;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 40px;
-    padding: 10px 20px;
-    cursor: pointer;
-    z-index: 2;
-}
 
 /* Personal Details Section */
 .personal-details {
@@ -149,17 +78,6 @@
     max-width: 343px;
 }
 
-.personal-details h4 {
-    font-size: 16px;
-    font-weight: bold;
-    color: #000000;
-    margin-bottom: 15px;
-}
-
-.divider {
-    border-bottom: 1px solid #E2E8F0;
-    margin-bottom: 15px;
-}
 
 .input-field {
     margin-bottom: 15px;

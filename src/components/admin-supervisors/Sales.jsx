@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { formatDate } from '../assets/utils';
-import '../assets/css/withdrawlHistoryScreen.css';
-import { useLocation, useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
-import TransactionEntry from '../components/TransactionEntry';
+import '../../assets/css/transactionHistory.css';
+import Header from '../../components/Header';
+import TransactionEntry from '../../components/TransactionEntry';
+import { formatDate } from '../../assets/utils';
 
-
-const WithdrawlHistoryScreen = () => {
+const SSales = ({id}) => {
     const [transactions, setTransactions] = useState([]);
     const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -15,15 +13,18 @@ const WithdrawlHistoryScreen = () => {
         const token = localStorage.getItem('authToken');
         const fetchTransactions = async () => {
             try {
-                const response = await axios.get(`${baseUrl}/api/v2/tyra_plus/transactions`, {
+                const response = await axios.get(`${baseUrl}/api/v2/tyra_plus_admin/admin/sales/all?agent_id=${id}&role=supervisor`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                console.log("transactionScreen", response.data)
+                if(response.data.length==0){
+                    alert("No Sales yet")
+                }
+                // console.log("array length",response.data.length)
+                // console.log("transactionScreen", response.data)
                 setTransactions(response.data);
             } catch (error) {
-                alert(error.response.data.detail)
                 console.error('Failed to fetch transactions:', error);
             }
         };
@@ -31,11 +32,11 @@ const WithdrawlHistoryScreen = () => {
         fetchTransactions();
     }, [baseUrl]);
 
-
+   
 
     const groupByDate = (data) => {
         return data.reduce((acc, transaction) => {
-            const date = formatDate(transaction.date);
+            const date = formatDate(transaction.purchase_date);
             if (!acc[date]) {
                 acc[date] = [];
             }
@@ -45,18 +46,19 @@ const WithdrawlHistoryScreen = () => {
     };
 
     const groupedTransactions = groupByDate(transactions);
+
     return (
-        <div className="withdrawalHistoryScreen">
-            <Header title="История вывода" />
+        <div className="transaction-history">
             {Object.keys(groupedTransactions).map((date, index) => (
                 <div key={index} className="transaction-date">
                     <p>{date}</p>
                     {groupedTransactions[date].map((transaction, idx) => (
                         <TransactionEntry
                             key={idx}
-                            title={transaction.transaction_type}
-                            amount={`${transaction.amount} ₸`}
-
+                            title={transaction.client_name}
+                            agent={transaction.agent.user_name}
+                            amount={`${transaction.superviser_bonus} ₸`}
+                            status="Оплата"
                         />
                     ))}
                 </div>
@@ -65,4 +67,4 @@ const WithdrawlHistoryScreen = () => {
     );
 };
 
-export default WithdrawlHistoryScreen;
+export default SSales;

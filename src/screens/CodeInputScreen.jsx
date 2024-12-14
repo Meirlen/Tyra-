@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../assets/css/codeInputScreen.css';
 import { formatPhoneNumber } from '../assets/utils';
+import Button from '../components/Button';
 
 const CodeInputScreen = () => {
   const location = useLocation();
@@ -49,10 +50,14 @@ const CodeInputScreen = () => {
 
           const profile = profileResponse.data;
 
+          if(profile.role=='admin'){
+             navigate('/admin-dashboard')
+          }
           // Check if user_name is null
-          if (profile.user_name === null) {
+         else if (profile.user_name === null) {
             navigate('/registration', { state: { profile } }); // Navigate to Registration screen
-          } else {
+          } 
+          else {
             navigate('/supervisor', { state: { profile } }); // Navigate to Supervisor/Profile screen
           }
 
@@ -61,8 +66,9 @@ const CodeInputScreen = () => {
           alert('Invalid code. Please try again.');
         }
       } catch (error) {
-        alert(error.response?.data.data.detail);
-        console.error('Failed to verify code:', error.response.data.data.detail);
+        console.log(error)
+        alert(error.response?.data.detail);
+        console.error('Failed to verify code:', error.response.data.detail);
       }
     } else {
       alert('Please enter a valid 6-digit code');
@@ -110,7 +116,7 @@ const CodeInputScreen = () => {
         onChange={(e) => setCode(e.target.value)}
         className="codeInputScreenInput"
       />
-      <button onClick={handleNext} className="codeInputScreenbutton">Дальше</button>
+      <Button onClick={handleNext}>Дальше</Button>
       <div className="resend">Отправить повторно можно через:</div>
       <div className='codeInputScreenPhoneNo'>
         {`0:${resendTimer.toString().padStart(2, '0')}`}

@@ -72,7 +72,6 @@
     cursor: pointer;
 
   }
-  
   .codeInputScreenbutton:disabled {
     background-color: #cccccc;
     cursor: not-allowed;

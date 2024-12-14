@@ -8,6 +8,8 @@
     background-color: #F6F8FA;
     border-radius: 12px;
     margin-bottom: 10px;
+    width: 343px;
+    box-sizing: border-box;
 }
 
 .transaction-info {
@@ -49,9 +51,12 @@
     font-family: "Inter", sans-serif;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 376px) {
     .transaction-status {
         text-align: left;
         /* margin-top: 10px; */
+    }
+    .transaction-entry  {
+        width: calc(100% - 30px);
     }
 }

@@ -1,0 +1,27 @@
+/* button.css */
+.genericButton {
+    padding: 19px 20px;
+    background-color: #3875F6;
+    width: 343px;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 40px;
+    margin-left: 15px;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+  .buttonBottom { 
+    position: fixed; bottom: 20px; 
+    /* Adjust this value as needed */ 
+    left: 50%; 
+    transform: translateX(-50%);
+  }
+
+  @media (max-width: 376px) {
+    .genericButton {
+      width: calc(100% - 30px);
+    }
+  }
+ 

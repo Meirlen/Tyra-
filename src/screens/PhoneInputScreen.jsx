@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../assets/css/PhoneInputScreen.css'
 import axios from 'axios'
 import { formatPhoneNumber } from '../assets/utils';
+import Button from '../components/Button';
 
 const PhoneInputScreen = () => {
   const [phone, setPhone] = useState('');
@@ -11,7 +12,6 @@ const PhoneInputScreen = () => {
 
   const handleNext = async () => {
     const formattedPhone = phone.replace(/[^0-9]/g, ''); // Extract digits
-    console.log("number",formattedPhone)
     if (formattedPhone.length === 11) {
       try {
         const response = await axios.post(`${baseUrl}/api/v2/tyra_plus/user/login_by_phone`, {
@@ -33,7 +33,7 @@ const PhoneInputScreen = () => {
 
 
   const baseUrl = import.meta.env.VITE_BASE_URL;
-  console.log("api url", baseUrl)
+
 
   return (
     <div className="phoneInputScreen">
@@ -46,7 +46,7 @@ const PhoneInputScreen = () => {
         onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
         className="phoneInputScreenInput"
       />
-      <button onClick={handleNext} className="phoneInputScreenbutton">Дальше</button>
+      <Button onClick={handleNext}>Дальше</Button>
     </div>
   );
 };

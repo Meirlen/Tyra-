@@ -3,10 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { formatPhoneNumber } from '../assets/utils';
-
+import SectionTitle from '../components/SectionTitle';
+import ProfileInfo from '../components/ProfileInfo';
+import BalanceSection from '../components/BalanceSection';
 const SupervisorScreen = () => {
     const [profile, setProfile] = useState(null);
     const navigate = useNavigate();
+
+    const handleButtonClick = () => { window.open('https://wa.me/77711474766', '_blank');};
 
     function transformDate(dateString) {
         const months = [
@@ -59,12 +63,6 @@ const SupervisorScreen = () => {
                         <path d="M9.57007 5.92993L3.50007 11.9999L9.57007 18.0699" stroke="#172D43" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M20.5 12H3.67" stroke="#172D43" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                     </svg></button>
-                {/* <button className="edit-button">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 20H21" stroke="#172D43" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M16.5 3.49998C16.8978 3.10216 17.4374 2.87866 18 2.87866C18.2786 2.87866 18.5544 2.93353 18.8118 3.04014C19.0692 3.14674 19.303 3.303 19.5 3.49998C19.697 3.69697 19.8532 3.93082 19.9598 4.18819C20.0665 4.44556 20.1213 4.72141 20.1213 4.99998C20.1213 5.27856 20.0665 5.55441 19.9598 5.81178C19.8532 6.06915 19.697 6.303 19.5 6.49998L7 19L3 20L4 16L16.5 3.49998Z" stroke="#172D43" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </button> */}
             </div>
 
             {/* ID and Role */}
@@ -78,34 +76,19 @@ const SupervisorScreen = () => {
                         ? profile.role
                         : (
                             <>
-                               <div style={{textAlign:'center'}}> {profile?.user_name}</div>
-                          
-                                <span style={{ color: '#7B8190', fontSize: '14px', fontWeight: '400' ,textAlign:'center'}}>{formatPhoneNumber(profile?.phone_number)}</span>
+                             <ProfileInfo userName={profile.user_name} phoneNumber={profile.phone_number} />
                             </>
                         )
                     }
                 </h3>
 
             </div>
-
-            {/* Balance Section */}
-            <div className="balance-section">
-                <div class="extra-circle"></div>
-                <div className="balance-info">
-                    <p>Баланс</p>
-                    <h2>{profile?.balance} ₸</h2>
-                </div>
-                <button onClick={() => window.open('https://wa.me/77711474766', '_blank')} className="withdraw-button">Вывести</button>
-            </div>
+            
+            <BalanceSection title="Баланс" balance={profile?.balance} buttonText="Вывести" onButtonClick={handleButtonClick} />
 
             {/* Personal Details */}
             <div className="personal-details">
-                <h4>Личные данные</h4>
-                <div className='divider'></div>
-                {/* <div className="input-field">
-                    <label>Город</label>
-                    <input type="text" value={profile?.city} readOnly />
-                </div> */}
+                <SectionTitle title='Личные данные' />
                 <div className="input-field">
                     <label>Номер телефона</label>
                     <input type="text" value={profile?.phone_number} readOnly />
@@ -122,7 +105,7 @@ const SupervisorScreen = () => {
 
             {/* Buttons Section */}
             <div className="buttons-section">
-                <button className="green-button" onClick={() => { navigate('/transaction-history') }}>поступления</button>
+                <button className="green-button" onClick={() => { navigate('/transaction-history',{ state: { profile} }) }}>поступления</button>
                 <button className="blue-button" onClick={() => { navigate('/withdrawl-history') }}>операции</button>
                 {profile.role === 'superviser'
                     ? (<><button className="primary-button" onClick={() => { navigate('/agents') }}>Мои агенты</button></>)
@@ -130,10 +113,7 @@ const SupervisorScreen = () => {
                         <>
                         </>
                     )
-                }
-
-                {/* <button  className="primary-button" onClick={() => { navigate('/agents') }}>Мои агенты</button> */}
-
+             }
             </div>
         </div>
     );

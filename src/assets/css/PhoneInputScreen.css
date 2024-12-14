@@ -46,27 +46,9 @@
     font-weight: 400;
 }
 
-.phoneInputScreenbutton {
-    padding: 19px 20px;
-    background-color: #3875F6;
-    width: 343px;
-    color: white;
-    border: none;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 40px;
-    margin-left: 15px;
-    margin-right: 15px;
-    cursor: pointer;
-
-}
 
 @media (max-width: 376px) {
     .phoneInputScreenInput {
-        width: calc(100% - 30px);
-    }
-
-    .phoneInputScreenbutton {
         width: calc(100% - 30px);
     }
 
