@@ -15,13 +15,19 @@ import AdminSalesScreen from './screens/AdminSalesScreen';
 import AdminClientsScreen from './screens/AdminClientsScreen';
 import AdminAgentDetailScreen from './screens/AdminAgentDetailedScreen';
 import AdminClientDetailedScreen from './screens/AdminClientDetailedScreen';
+import RequireAuth from './screens/RequireAuth';
+
 function App() {
 
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<PhoneInputScreen />} />
+          <Route path="/" element={
+            <RequireAuth>
+              <PhoneInputScreen />
+            </RequireAuth>
+          } />
           <Route path="/code-input" element={<CodeInputScreen />} />
           <Route path="/registration" element={<RegistrationScreen />} />
           <Route path="/supervisor" element={<SupervisorScreen />} />

@@ -6,11 +6,12 @@ import { formatPhoneNumber } from '../assets/utils';
 import SectionTitle from '../components/SectionTitle';
 import ProfileInfo from '../components/ProfileInfo';
 import BalanceSection from '../components/BalanceSection';
+import { IoIosLogOut } from "react-icons/io";
 const SupervisorScreen = () => {
     const [profile, setProfile] = useState(null);
     const navigate = useNavigate();
 
-    const handleButtonClick = () => { window.open('https://wa.me/77711474766', '_blank');};
+    const handleButtonClick = () => { window.open('https://wa.me/77711474766', '_blank'); };
 
     function transformDate(dateString) {
         const months = [
@@ -54,6 +55,11 @@ const SupervisorScreen = () => {
     if (!profile) {
         return <div>Loading...</div>;
     }
+    const handleLogout = () => {
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('userData');
+       navigate('/')
+    } // Redirect to login page or show login form
     return (
         <div className="supervisorScreen">
             {/* Header */}
@@ -63,6 +69,10 @@ const SupervisorScreen = () => {
                         <path d="M9.57007 5.92993L3.50007 11.9999L9.57007 18.0699" stroke="#172D43" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M20.5 12H3.67" stroke="#172D43" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                     </svg></button>
+                <button className='back-button' onClick={handleLogout}>
+                    <IoIosLogOut style={{ width: "24px", height: '24px' }} />
+                </button>
+
             </div>
 
             {/* ID and Role */}
@@ -76,14 +86,14 @@ const SupervisorScreen = () => {
                         ? profile.role
                         : (
                             <>
-                             <ProfileInfo userName={profile.user_name} phoneNumber={profile.phone_number} />
+                                <ProfileInfo userName={profile.user_name} phoneNumber={profile.phone_number} />
                             </>
                         )
                     }
                 </h3>
 
             </div>
-            
+
             <BalanceSection title="Баланс" balance={profile?.balance} buttonText="Вывести" onButtonClick={handleButtonClick} />
 
             {/* Personal Details */}
@@ -105,7 +115,7 @@ const SupervisorScreen = () => {
 
             {/* Buttons Section */}
             <div className="buttons-section">
-                <button className="green-button" onClick={() => { navigate('/transaction-history',{ state: { profile} }) }}>поступления</button>
+                <button className="green-button" onClick={() => { navigate('/transaction-history', { state: { profile } }) }}>поступления</button>
                 <button className="blue-button" onClick={() => { navigate('/withdrawl-history') }}>операции</button>
                 {profile.role === 'superviser'
                     ? (<><button className="primary-button" onClick={() => { navigate('/agents') }}>Мои агенты</button></>)
@@ -113,7 +123,7 @@ const SupervisorScreen = () => {
                         <>
                         </>
                     )
-             }
+                }
             </div>
         </div>
     );

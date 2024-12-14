@@ -3,7 +3,7 @@ import { useParams ,useLocation} from 'react-router-dom';
 import '../assets/css/app.css';
 import Header from '../components/Header';
 import Tab from '../components/Tab';  // We will create this component next
-import Profile from '../components/admin-clients/profile';
+import Profile from '../components/admin-clients/Profile'
 import Payments from '../components/admin-clients/payments';
 
 const AdminClientDetailedScreen = () => {

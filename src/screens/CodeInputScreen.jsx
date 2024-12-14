@@ -40,6 +40,7 @@ const CodeInputScreen = () => {
           // Store the token in local storage
           const token = response.data.data.token;
           localStorage.setItem('authToken', token);
+          localStorage.setItem('userData', JSON.stringify(response.data.user));
 
           // Make second API call to fetch user profile
           const profileResponse = await axios.get(`${baseUrl}/api/v2/tyra_plus/user/profile`, {
