@@ -5,8 +5,9 @@ import { formatRussianDate } from '../../assets/utils';
 import TransactionEntry from '../../components/TransactionEntry';
 
 
-const Agents = ({id}) => {
+const Agents = ({ id }) => {
     const [agents, setAgents] = useState([]);
+    const [message, setMessage] = useState('');
     const baseUrl = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
@@ -21,9 +22,9 @@ const Agents = ({id}) => {
                 if (response?.data) {
                     setAgents(response.data);
                 }
-               
+
             } catch (error) {
-                alert(error.response?.data?.detail);
+                setMessage("No Agents Yet");
                 console.error('Failed to fetch Agents:', error);
             }
         };
@@ -33,6 +34,7 @@ const Agents = ({id}) => {
 
     return (
         <div className="my-agents">
+            {message && <h3>{message}</h3>}
             {agents.map((agent, index) => (
                 <TransactionEntry key={index} title={agent?.user_name} agent={formatRussianDate(agent?.created_at)} amount={agent?.total_amount} status={agent?.total_sales.toString()} />
             ))}

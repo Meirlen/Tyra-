@@ -5,8 +5,9 @@ import Header from '../../components/Header';
 import TransactionEntry from '../../components/TransactionEntry';
 import { formatDate } from '../../assets/utils';
 
-const Payments = ({id}) => {
+const Payments = ({ id }) => {
     const [sales, setSales] = useState([]);
+    const [message, setMessage] = useState('');
     const baseUrl = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
@@ -18,6 +19,9 @@ const Payments = ({id}) => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+                if (response.data.length == 0) {
+                    setMessage("No Payments Yet")
+                }
                 setSales(response.data);
             } catch (error) {
                 console.error('Failed to fetch sales:', error);
@@ -44,6 +48,7 @@ const Payments = ({id}) => {
 
     return (
         <div className="transaction-history">
+             {message && <h3>{message}</h3>}
             {Object.keys(groupedSales).map((date, index) => (
                 <div key={index} className="transaction-date">
                     <p>{date}</p>

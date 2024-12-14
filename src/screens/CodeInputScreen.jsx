@@ -9,6 +9,7 @@ const CodeInputScreen = () => {
   const location = useLocation();
   const [code, setCode] = useState('');
   const [resendTimer, setResendTimer] = useState(20);
+  const [errorMessage, setErrorMessage] = useState('');
   const [canResend, setCanResend] = useState(false);
   const navigate = useNavigate();
   const phone = location.state?.phone || ''; // Retrieve the phone number
@@ -40,7 +41,7 @@ const CodeInputScreen = () => {
           // Store the token in local storage
           const token = response.data.data.token;
           localStorage.setItem('authToken', token);
-          localStorage.setItem('userData', JSON.stringify(response.data.user));
+          localStorage.setItem('userData', JSON.stringify(response.data.data.user));
 
           // Make second API call to fetch user profile
           const profileResponse = await axios.get(`${baseUrl}/api/v2/tyra_plus/user/profile`, {
@@ -64,15 +65,19 @@ const CodeInputScreen = () => {
 
 
         } else {
-          alert('Invalid code. Please try again.');
+          setErrorMessage('Invalid code. Please try again.');
         }
       } catch (error) {
         console.log(error)
-        alert(error.response?.data.detail);
+        if(error.response?.data?.detail){
+          setErrorMessage("Incorrect Code")
+        }
+        else
+        setErrorMessage('Failed to verify code');
         console.error('Failed to verify code:', error.response.data.detail);
       }
     } else {
-      alert('Please enter a valid 6-digit code');
+      setErrorMessage('Please enter a valid 6-digit code');
     }
   };
 
@@ -117,6 +122,7 @@ const CodeInputScreen = () => {
         onChange={(e) => setCode(e.target.value)}
         className="codeInputScreenInput"
       />
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
       <Button onClick={handleNext}>Дальше</Button>
       <div className="resend">Отправить повторно можно через:</div>
       <div className='codeInputScreenPhoneNo'>

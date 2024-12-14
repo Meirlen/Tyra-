@@ -7,6 +7,7 @@ import { formatDate } from '../../assets/utils';
 
 const Sales = ({ id }) => {
     const [sales, setSales] = useState([]);
+    const [message, setMessage] = useState('');
     const baseUrl = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
@@ -19,7 +20,7 @@ const Sales = ({ id }) => {
                     },
                 });
                 if (response.data.length == 0) {
-                    alert("No Sales yet")
+                    setMessage("No Sales Yet")
                 }
                 setSales(response.data);
             } catch (error) {
@@ -46,6 +47,7 @@ const Sales = ({ id }) => {
 
     return (
         <div className="transaction-history">
+             {message && <h3>{message}</h3>}
             {Object.keys(groupedSales).map((date, index) => (
                 <div key={index} className="transaction-date">
                     <p>{date}</p>

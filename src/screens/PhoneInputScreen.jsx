@@ -7,6 +7,7 @@ import Button from '../components/Button';
 
 const PhoneInputScreen = () => {
   const [phone, setPhone] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
 
@@ -23,11 +24,11 @@ const PhoneInputScreen = () => {
         // Navigate to the next screen with phone as state
         navigate('/code-input', { state: { phone: formattedPhone } });
       } catch (error) {
-        alert(error.response.data.detail);
+        setErrorMessage(error.response.data.detail);
         console.error('Failed to login:', error);
       }
     } else {
-      alert('Please enter a valid phone number');
+      setErrorMessage('Please enter a valid phone number');
     }
   };
 
@@ -46,6 +47,7 @@ const PhoneInputScreen = () => {
         onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
         className="phoneInputScreenInput"
       />
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
       <Button onClick={handleNext}>Дальше</Button>
     </div>
   );

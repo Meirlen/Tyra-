@@ -9,6 +9,7 @@ import TransactionEntry from '../components/TransactionEntry';
 
 const WithdrawlHistoryScreen = () => {
     const [transactions, setTransactions] = useState([]);
+    const [message, setMessage] = useState('');
     const baseUrl = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
@@ -20,10 +21,15 @@ const WithdrawlHistoryScreen = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                console.log("transactionScreen", response.data)
+                if (response?.data) {
+                    if (response?.data.length == 0) {
+                        setMessage("There is no Transaction")
+                    }
+                    console.log("length", response?.data.length)
+                }
                 setTransactions(response.data);
             } catch (error) {
-                alert(error.response.data.detail)
+                setMessage(error.response.data.detail)
                 console.error('Failed to fetch transactions:', error);
             }
         };
@@ -48,6 +54,7 @@ const WithdrawlHistoryScreen = () => {
     return (
         <div className="withdrawalHistoryScreen">
             <Header title="История вывода" />
+            {message && <h3>{message}</h3>}
             {Object.keys(groupedTransactions).map((date, index) => (
                 <div key={index} className="transaction-date">
                     <p>{date}</p>

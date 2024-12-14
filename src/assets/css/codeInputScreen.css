@@ -1,103 +1,113 @@
 .codeInputScreen {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
 }
-.back-arrow{
-    width: 100%;
-    float: left;
-    margin-bottom: 50px;
+
+.back-arrow {
+  width: 100%;
+  float: left;
+  margin-bottom: 50px;
 }
+
 .codeInputScreenHeading {
-    font-family: "Averta CY W01 Bold";
-    font-size: 24px;
-    font-weight: 600;
-    text-align: center;
-    color: #172D43;
+  font-family: "Averta CY W01 Bold";
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  color: #172D43;
 }
 
 .codeInputScreenSubHeading {
-    font-size: 14px;
-    font-weight: 400;
-    padding-top: 8px;
-    color: #7B8190;
+  font-size: 14px;
+  font-weight: 400;
+  padding-top: 8px;
+  color: #7B8190;
 }
-.codeInputScreenPhoneNo{
-    color: #172D43;
-    font-weight: 600;
-    font-size: 14px;
-    text-align: center;
-    margin-top: 10px;
+
+.codeInputScreenPhoneNo {
+  color: #172D43;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
 }
-.codeInputScreenEditButton{
-    margin-left: 10px;
-    color: #3875F6;
-    cursor: pointer;
+
+.codeInputScreenEditButton {
+  margin-left: 10px;
+  color: #3875F6;
+  cursor: pointer;
 }
-  
-  .codeInputScreenInput {
-    text-align: center;
-    width: 343px;
-    border-radius: 8px;
-    background-color: #F6F8FA;
-    margin-top: 40px;
-    margin-bottom: 15px;
-    padding: 19px 24px;
-    font-size: 16px;
-    margin-left: 15px;
-    margin-right: 15px;
-    letter-spacing: 5px;
-    box-sizing: border-box;
-    outline: none;
-    border: none;
-  }
-  
-  .codeInputScreenInput:focus {
-    border: 1px solid #3875F6;
-  }
-  
+
+.codeInputScreenInput {
+  text-align: center;
+  width: 343px;
+  border-radius: 8px;
+  background-color: #F6F8FA;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  padding: 19px 24px;
+  font-size: 16px;
+  margin-left: 15px;
+  margin-right: 15px;
+  letter-spacing: 5px;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+}
+
+.codeInputScreenInput:focus {
+  border: 1px solid #3875F6;
+}
+
+.codeInputScreenbutton {
+  padding: 19px 20px;
+  background-color: #3875F6;
+  width: 343px;
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 40px;
+  margin-left: 15px;
+  margin-right: 15px;
+  cursor: pointer;
+
+}
+
+.codeInputScreenbutton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.resend {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #7B8190;
+  font-weight: 400;
+}
+
+.resend a {
+  color: #0066ff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+@media (max-width: 376px) {
   .codeInputScreenbutton {
-    padding: 19px 20px;
-    background-color: #3875F6;
-    width: 343px;
-    color: white;
-    border: none;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 40px;
-    margin-left: 15px;
-    margin-right: 15px;
-    cursor: pointer;
+    width: calc(100% - 30px);
+  }
 
+  .codeInputScreenInput {
+    width: calc(100% - 30px);
   }
-  .codeInputScreenbutton:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
-  
-  .resend {
-    margin-top: 30px;
-    font-size: 14px;
-    color: #7B8190;
-    font-weight: 400;
-  }
-  
-  .resend a {
-    color: #0066ff;
-    text-decoration: none;
-    font-weight: bold;
-    margin-left: 5px;
-  }
-  
-  @media (max-width: 376px) {
-    .codeInputScreenbutton {
-        width: calc(100% - 30px);
-    }
 
-    .codeInputScreenInput  {
-        width: calc(100% - 30px);
-    }
+}
 
+.error-message {
+  color: red;
+  margin-bottom: 10px;
 }

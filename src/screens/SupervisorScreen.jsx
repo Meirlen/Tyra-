@@ -58,7 +58,7 @@ const SupervisorScreen = () => {
     const handleLogout = () => {
         localStorage.removeItem('authToken');
         localStorage.removeItem('userData');
-       navigate('/')
+        navigate('/')
     } // Redirect to login page or show login form
     return (
         <div className="supervisorScreen">

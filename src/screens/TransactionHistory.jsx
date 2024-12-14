@@ -8,6 +8,7 @@ import { formatDate } from '../assets/utils';
 
 const TransactionHistory = () => {
     const [transactions, setTransactions] = useState([]);
+    const [message, setMessage] = useState('');
     const baseUrl = import.meta.env.VITE_BASE_URL;
     const location = useLocation()
     const state = location.state
@@ -21,8 +22,13 @@ const TransactionHistory = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                console.log("transactionScreen", response.data)
                 setTransactions(response.data);
+                if (response?.data) {
+                    if (response?.data.length == 0) {
+                        setMessage("There is no Transaction")
+                    }
+                    console.log("length", response?.data.length)
+                }
             } catch (error) {
                 alert(error.response.data.detail)
                 console.error('Failed to fetch transactions:', error);
@@ -50,6 +56,7 @@ const TransactionHistory = () => {
     return (
         <div className="transaction-history">
             <Header title="История поступлений" />
+            {message && <h3>{message}</h3>}
             {Object.keys(groupedTransactions).map((date, index) => (
                 <div key={index} className="transaction-date">
                     <p>{date}</p>
